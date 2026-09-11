@@ -3,40 +3,45 @@
 // ========================================
 
 
-// 1. ROTATING HERO TEXT
-// ----------------------------------------
+// 1. CHANGING "CURRENTLY EXPLORING" TEXT
+// ========================================
 
-const heroDescription = document.querySelector(".hero-description");
+const skillElement =
+    document.querySelector("#changing-skill");
 
-const descriptions = [
-    "Computer Science student at Monash University, interested in software development, data, and building practical technology solutions.",
-    "I enjoy turning ideas into practical software and learning how systems work.",
-    "Currently exploring software engineering, cloud technologies, and data."
+const skills = [
+    "Software Engineering",
+    "Cloud Technologies",
+    "Data & Analytics",
+    "Full-Stack Development"
 ];
 
-let descriptionIndex = 0;
+let skillIndex = 0;
 
-function changeDescription() {
-    descriptionIndex =
-        (descriptionIndex + 1) % descriptions.length;
+setInterval(() => {
 
-    heroDescription.style.opacity = "0";
+    skillIndex =
+        (skillIndex + 1) % skills.length;
+
+    skillElement.style.opacity = "0";
 
     setTimeout(() => {
-        heroDescription.textContent =
-            descriptions[descriptionIndex];
 
-        heroDescription.style.opacity = "1";
+        skillElement.textContent =
+            skills[skillIndex];
+
+        skillElement.style.opacity = "1";
+
     }, 300);
-}
 
-setInterval(changeDescription, 5000);
+}, 2500);
 
 
 // 2. SCROLL REVEAL ANIMATION
-// ----------------------------------------
+// ========================================
 
-const sections = document.querySelectorAll(".section");
+const sections =
+    document.querySelectorAll(".section");
 
 const observer = new IntersectionObserver(
     (entries) => {
@@ -44,7 +49,11 @@ const observer = new IntersectionObserver(
         entries.forEach((entry) => {
 
             if (entry.isIntersecting) {
+
                 entry.target.classList.add("visible");
+
+                // Stop observing once the animation has happened
+                observer.unobserve(entry.target);
             }
 
         });
@@ -56,13 +65,16 @@ const observer = new IntersectionObserver(
 );
 
 sections.forEach((section) => {
+
     section.classList.add("hidden");
+
     observer.observe(section);
+
 });
 
 
 // 3. PROJECT CARD HOVER EFFECT
-// ----------------------------------------
+// ========================================
 
 const projectCards =
     document.querySelectorAll(".project-card");
@@ -81,31 +93,41 @@ projectCards.forEach((card) => {
 
 
 // 4. BACK TO TOP BUTTON
-// ----------------------------------------
+// ========================================
 
-const backToTop = document.createElement("button");
+const backToTop =
+    document.createElement("button");
 
 backToTop.textContent = "↑";
 
 backToTop.classList.add("back-to-top");
 
+backToTop.setAttribute(
+    "aria-label",
+    "Back to top"
+);
+
 document.body.appendChild(backToTop);
 
 
-// Show button after scrolling
+// Show button when scrolling
 
 window.addEventListener("scroll", () => {
 
     if (window.scrollY > 500) {
+
         backToTop.classList.add("show");
+
     } else {
+
         backToTop.classList.remove("show");
+
     }
 
 });
 
 
-// Scroll to top when clicked
+// Scroll to top
 
 backToTop.addEventListener("click", () => {
 
@@ -117,19 +139,22 @@ backToTop.addEventListener("click", () => {
 });
 
 
-// 5. UPDATE FOOTER YEAR AUTOMATICALLY
-// ----------------------------------------
+// 5. UPDATE FOOTER YEAR
+// ========================================
 
-const footer = document.querySelector("footer p");
+const footer =
+    document.querySelector("footer p");
 
 if (footer) {
+
     footer.textContent =
         `© ${new Date().getFullYear()} Yasmin Husni`;
+
 }
 
 
 // 6. ACTIVE NAVIGATION LINK
-// ----------------------------------------
+// ========================================
 
 const navLinks =
     document.querySelectorAll(".nav-links a");
@@ -144,7 +169,10 @@ window.addEventListener("scroll", () => {
             section.offsetTop - 150;
 
         if (window.scrollY >= sectionTop) {
-            currentSection = section.getAttribute("id");
+
+            currentSection =
+                section.getAttribute("id");
+
         }
 
     });
@@ -157,7 +185,9 @@ window.addEventListener("scroll", () => {
             link.getAttribute("href") ===
             `#${currentSection}`
         ) {
+
             link.classList.add("active");
+
         }
 
     });
