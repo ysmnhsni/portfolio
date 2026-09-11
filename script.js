@@ -10,9 +10,8 @@ const skillElement =
     document.querySelector("#changing-skill");
 
 const skills = [
-    "Software Engineering",
-    "Cloud Technologies",
-    "Data & Analytics",
+    "Parallel Computing",
+    "Cloud Computing",
     "Full-Stack Development"
 ];
 
